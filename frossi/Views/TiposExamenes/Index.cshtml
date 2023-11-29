@@ -1,0 +1,47 @@
+﻿@model IEnumerable<frossi.Models.TiposExamenes>
+
+@{
+   //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+@* <head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tipos de Exámenes</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head> *@
+<body>
+<p>
+    <a asp-action="Create">Nuevo Exámen</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editttt</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+
+</body>
+</html>
