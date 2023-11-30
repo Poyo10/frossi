@@ -60,10 +60,20 @@ namespace frossi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdTipoExamen,IdSolicitante,Correctas,Incorrectas,FechaInicio,FechaFin")] ExaHechos exaHechos)
+        //public async Task<IActionResult> Create([Bind("Id,IdTipoExamen,IdSolicitante,Correctas,Incorrectas,FechaInicio,FechaFin")] ExaHechos exaHechos)
+        public async Task<IActionResult> Create([Bind("IdTipoExamen, IdTipoDoc, NroDoc")] ExaHechos exaHechos)
         {
             if (ModelState.IsValid)
             {
+
+                var nroDocValue = exaHechos.Solicitantes.NroDoc;
+                var idTipoDocValue = exaHechos.Solicitantes.IdTipoDoc;
+
+
+
+
+
+
                 _context.Add(exaHechos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -171,5 +181,34 @@ namespace frossi.Controllers
         {
           return _context.ExaHechos.Any(e => e.Id == id);
         }
+
+
+        public IActionResult BuscarSolicitante(int idTipoDoc, string nroDoc)
+        {
+            var solicitante = _context.Solicitantes
+                .FirstOrDefault(s => s.IdTipoDoc == idTipoDoc && s.NroDoc == nroDoc);
+
+            if (solicitante != null)
+            {
+                // Aquí tienes el IdSolicitante encontrado
+                int idSolicitanteEncontrado = solicitante.Id;
+
+                // Realiza las acciones necesarias con el IdSolicitante encontrado
+                // Por ejemplo, podrías asignarlo a una propiedad y usarlo en otro método o realizar alguna otra acción.
+
+                //return View();
+                return RedirectToAction("OtraAccion", "Controlador");
+            }
+            else
+            {
+                // El solicitante no fue encontrado
+                // Maneja la lógica en caso de que no se encuentre el solicitante con los valores proporcionados
+
+                return View("SolicitanteNoEncontrado");
+            }
+
+            // Resto del código del método...
+        }
+
     }
 }

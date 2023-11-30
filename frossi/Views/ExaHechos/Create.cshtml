@@ -19,60 +19,44 @@
 <body>
 
     <div class="container mt-5 pt-5">
+
         <div class="text-center mb-4">
             <h2>Nuevo Examen Teórico</h2>
         </div>
-
-
         <div class="row justify-content-center">
 
             <div class="col-12 col-xl-4 col-md-6">
 
-        @* 
-<div class="row">
-    <div class="col-md-4"> *@
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdTipoExamen" class="control-label">Seleccione el tipo de exámen</label>
-                <select asp-for="IdTipoExamen" class ="form-control" asp-items="ViewBag.IdTipoExamen"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdSolicitante" class="control-label">Tipo de Documento</label>
-                <select asp-for="IdSolicitante" class ="form-control" asp-items="ViewBag.IdTipodoc"></select>
-            </div>
-            <div class="form-group">
-                        <label asp-for="NroDoc" class="control-label"></label>
-                        <input asp-for="NroDoc" class="form-control" />
-                <span asp-validation-for="Correctas" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Incorrectas" class="control-label"></label>
-                <input asp-for="Incorrectas" class="form-control" />
-                <span asp-validation-for="Incorrectas" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaInicio" class="control-label"></label>
-                <input asp-for="FechaInicio" class="form-control" />
-                <span asp-validation-for="FechaInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaFin" class="control-label"></label>
-                <input asp-for="FechaFin" class="form-control" />
-                <span asp-validation-for="FechaFin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+                <form asp-action="BuscarSolicitante" method="get">
+                @* <form asp-controller="Inicio" asp-action="IniciarSesion" method="post"> *@
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-3">
+                        <label asp-for="IdTipoExamen" class="control-label">Seleccione el tipo de exámen</label>
+                        <select asp-for="IdTipoExamen" class ="form-control" asp-items="ViewBag.IdTipoExamen"></select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Solicitantes.IdTipoDoc" class="control-label">Tipo de Documento</label>
+                        <select asp-for="Solicitantes.IdTipoDoc" name="idTipoDoc" class="form-control" asp-items="ViewBag.IdTipoDoc"></select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Solicitantes.NroDoc" class="control-label">Número de Documento</label>
+                        @* <input asp-for="Solicitantes.NroDoc" class="form-control" /> *@
 
-</div>
+                        <input type="text" id="nroDoc" name="nroDoc" class="form-control" required />
+
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="d-grid gap-2"> @*  mb-3"> *@
+                        <button class="btn btn-primary" type="submit" value="Comenzar">Comenzar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
 
     </div>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
